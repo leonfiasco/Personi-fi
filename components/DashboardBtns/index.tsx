@@ -1,32 +1,36 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const DashboardBtns = () => {
+  const router = useRouter();
   const buttons = [
     {
       title: "Income",
       iconName: "arrow-up",
-      bgColor: "#8aa908", // $green100
-      iconColor: "#16a34a", // $green600
+      bgColor: "#8aa908",
+      iconColor: "#16a34a",
+      onPress: () => router.push("/input-income"), // 👈 navigate to screen
     },
     {
       title: "Expenses",
       iconName: "arrow-down",
-      bgColor: "##9a161b", // $red100
-      iconColor: "#dc2626", // $red600
+      bgColor: "#9a161b",
+      iconColor: "#dc2626",
+      onPress: () => router.push("/input-expense"),
     },
     {
       title: "Transactions",
       iconName: "list",
-      bgColor: "#dbeafe", // $blue100
-      iconColor: "#2563eb", // $blue600
+      bgColor: "#dbeafe",
+      iconColor: "#2563eb",
     },
     {
       title: "Report",
       iconName: "pie-chart",
-      bgColor: "#f3e8ff", // $purple100
-      iconColor: "#7c3aed", // $purple600
+      bgColor: "#f3e8ff",
+      iconColor: "#7c3aed",
     },
   ];
 
@@ -36,13 +40,14 @@ const DashboardBtns = () => {
         <TouchableOpacity
           key={index}
           style={styles.button}
-          onPress={() => console.log(`${button.title} pressed`)}
+          onPress={
+            button.onPress || (() => console.log(`${button.title} pressed`))
+          }
         >
           <View style={styles.buttonContent}>
-            {/* Circular container for the icon */}
             <View style={styles.iconContainer}>
               <Feather
-                name={button.iconName as any} // Unsafe but silences the error
+                name={button.iconName as any}
                 size={20}
                 color={button.iconColor}
               />

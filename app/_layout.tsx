@@ -19,8 +19,10 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "PlaywriteDE-Grund": require("../assets/fonts/PlaywriteDEGrund-VariableFont_wght.ttf"),
+    Winky: require("../assets/fonts/WinkySans-Bold.ttf"),
   });
 
   const customConfig = {
@@ -29,22 +31,21 @@ export default function RootLayout() {
       ...config.tokens,
       colors: {
         ...config.tokens.colors,
-        background: "#F7F7F6", // Your dark background
-        // tabBackground: "#FF0000", // Your dark background
-        cardBg: "#262727", // Your card background
-        futuristicAccent: "#B2DF01", // Your accent color
+        background: "#F7F7F6",
+        cardBg: "#262727",
+        futuristicAccent: "#B2DF01",
         oliveGreen: "#6B8E23",
       },
     },
   };
 
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
     return null;
   }
 
@@ -52,8 +53,12 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <GluestackUIProvider config={customConfig}>
         <Stack>
+          <Stack.Screen name="input-income" options={{ headerShown: false }} />
+          <Stack.Screen name="input-expense" options={{ headerShown: false }} />
+
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen name="In" />
         </Stack>
         <StatusBar style="auto" />
       </GluestackUIProvider>

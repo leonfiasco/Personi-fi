@@ -54,7 +54,7 @@ const Transactions = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#e9e8e9",
+    backgroundColor: "#e6f7d9",
     borderRadius: 16,
     padding: 16,
     marginHorizontal: 16,

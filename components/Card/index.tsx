@@ -1,95 +1,245 @@
 import { Box, Text, HStack, VStack } from "@gluestack-ui/themed";
+import { StyleSheet } from "react-native";
+import { MotiView, MotiText } from "moti";
 
 export default function Card({}) {
   return (
-    <Box
-      bg="$futuristicAccent"
-      mx="$4"
-      p="$4"
-      rounded="$xl"
-      shadowColor="$futuristicAccent"
-      overflow="hidden" // Needed for the circles to be properly cut off
-      position="relative" // For absolute positioning of circles
+    <MotiView
+      from={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", damping: 20 }}
+      style={styles.cardContainer}
     >
-      {/* Background circles - positioned absolutely */}
-      <Box
-        position="absolute"
-        top={-50}
-        right={-50}
-        width={200}
-        height={200}
-        borderRadius={100}
-        borderWidth={1}
-        borderColor="$oliveGreen"
-        opacity={0.6}
+      {/* Background circles */}
+      <MotiView
+        from={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.6, scale: 1 }}
+        transition={{ type: "timing", duration: 800, delay: 200 }}
+        style={styles.topRightCircle}
       />
-      <Box
-        position="absolute"
-        bottom={-30}
-        left={-30}
-        width={150}
-        height={150}
-        borderRadius={75}
-        borderWidth={1}
-        borderColor="$oliveGreen"
-        opacity={0.6}
+      <MotiView
+        from={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.6, scale: 1 }}
+        transition={{ type: "timing", duration: 800, delay: 300 }}
+        style={styles.bottomLeftCircle}
       />
-      <Box
-        position="absolute"
-        bottom={-50}
-        left={-80}
-        width={150}
-        height={150}
-        borderRadius={75}
-        borderWidth={1}
-        borderColor="$oliveGreen"
-        opacity={0.6}
+      <MotiView
+        from={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.6, scale: 1 }}
+        transition={{ type: "timing", duration: 800, delay: 400 }}
+        style={styles.bottomFarLeftCircle}
       />
 
-      {/* Card content remains the same */}
-      <VStack alignItems="center" mb="$4">
-        <Text color="$textDark" fontSize="$md" mb="$6">
+      {/* Card content */}
+      <VStack style={styles.totalContainer}>
+        <MotiText
+          from={{ opacity: 0, translateY: -10 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: "timing", duration: 500, delay: 200 }}
+          style={styles.totalLabel}
+        >
           Current Total 💰
-        </Text>
-        <Text color="$textDark" fontSize="$3xl" fontWeight="$bold">
+        </MotiText>
+        <MotiText
+          from={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", damping: 10, delay: 300 }}
+          style={styles.totalAmount}
+        >
           $8,270.00
-        </Text>
+        </MotiText>
       </VStack>
-      <VStack alignItems="center" mb="$4">
-        <Text color="$textDark" fontSize="$sm">
-          Updated: 12/04/25
-        </Text>
-      </VStack>
-      {/* White rectangle with split sections */}
-      <Box bg="$white" rounded="$lg" overflow="hidden">
-        <HStack>
-          {/* Income Section (50%) */}
-          <Box
-            flex={1}
-            p="$3"
-            alignItems="center"
-            borderRightWidth={1}
-            borderRightColor="$trueGray200"
-          >
-            <Text color="#8aa908" fontWeight="$bold">
-              Income
-            </Text>
-            <Text fontSize="$xl" mt="$1">
-              $5,420.00
-            </Text>
-          </Box>
 
-          {/* Outgoing Section (50%) */}
-          <Box flex={1} p="$3" alignItems="center">
-            <Text color="#9a161b" fontWeight="$bold">
+      <VStack style={styles.updatedContainer}>
+        <MotiText
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "timing", duration: 500, delay: 400 }}
+          style={styles.updatedText}
+        >
+          Updated: 12/04/25
+        </MotiText>
+      </VStack>
+
+      {/* White rectangle with split sections */}
+      <MotiView
+        from={{ opacity: 0, translateY: 20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: "spring", delay: 500 }}
+        style={styles.whiteCard}
+      >
+        <HStack>
+          {/* Income Section */}
+          <MotiView
+            from={{ opacity: 0, translateX: -20 }}
+            animate={{ opacity: 1, translateX: 0 }}
+            transition={{ type: "timing", duration: 600, delay: 600 }}
+            style={styles.incomeSection}
+          >
+            <MotiText
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "timing", duration: 300, delay: 700 }}
+              style={styles.incomeLabel}
+            >
+              Income
+            </MotiText>
+            <MotiText
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "timing", duration: 300, delay: 750 }}
+              style={styles.incomeAmount}
+            >
+              $5,420.00
+            </MotiText>
+          </MotiView>
+
+          {/* Expense Section */}
+          <MotiView
+            from={{ opacity: 0, translateX: 20 }}
+            animate={{ opacity: 1, translateX: 0 }}
+            transition={{ type: "timing", duration: 600, delay: 600 }}
+            style={styles.expenseSection}
+          >
+            <MotiText
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "timing", duration: 300, delay: 700 }}
+              style={styles.expenseLabel}
+            >
               Expense
-            </Text>
-            <Text fontSize="$xl" mt="$1">
+            </MotiText>
+            <MotiText
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "timing", duration: 300, delay: 750 }}
+              style={styles.expenseAmount}
+            >
               $2,850.00
-            </Text>
-          </Box>
+            </MotiText>
+          </MotiView>
         </HStack>
-      </Box>
-    </Box>
+      </MotiView>
+    </MotiView>
   );
 }
+
+const styles = StyleSheet.create({
+  // ... (keep all your existing styles exactly the same)
+  cardContainer: {
+    backgroundColor: "#B2DF01",
+    marginHorizontal: 16,
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: "#B2DF01",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    overflow: "hidden",
+    position: "relative",
+  },
+  topRightCircle: {
+    position: "absolute",
+    top: -50,
+    right: -50,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#6B8E23",
+    opacity: 0.6,
+  },
+  bottomLeftCircle: {
+    position: "absolute",
+    bottom: -30,
+    left: -30,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 1,
+    borderColor: "#6B8E23",
+    opacity: 0.6,
+  },
+  bottomFarLeftCircle: {
+    position: "absolute",
+    bottom: -50,
+    left: -80,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 1,
+    borderColor: "#6B8E23",
+    opacity: 0.6,
+  },
+  totalContainer: {
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  updatedContainer: {
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  whiteCard: {
+    backgroundColor: "white",
+    borderRadius: 8,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  incomeSection: {
+    flex: 1,
+    padding: 12,
+    alignItems: "center",
+    borderRightWidth: 1,
+    borderRightColor: "#E5E5E5",
+  },
+  expenseSection: {
+    flex: 1,
+    padding: 12,
+    alignItems: "center",
+  },
+  totalLabel: {
+    color: "#262727",
+    fontSize: 16,
+    marginBottom: 24,
+    fontFamily: "PlaywriteDE-Grund",
+  },
+  totalAmount: {
+    color: "#262727",
+    fontSize: 38,
+    fontWeight: "bold",
+    fontFamily: "Winky",
+  },
+  updatedText: {
+    color: "#262727",
+    fontSize: 14,
+    fontFamily: "PlaywriteDE-Grund",
+  },
+  incomeLabel: {
+    color: "#8aa908",
+    fontWeight: "bold",
+    fontFamily: "PlaywriteDE-Grund",
+    fontSize: 16,
+  },
+  incomeAmount: {
+    fontSize: 16,
+    marginTop: 4,
+    fontFamily: "PlaywriteDE-Grund",
+    fontWeight: "600",
+  },
+  expenseLabel: {
+    color: "#9a161b",
+    fontWeight: "bold",
+    fontFamily: "PlaywriteDE-Grund",
+    fontSize: 16,
+  },
+  expenseAmount: {
+    fontSize: 16,
+    marginTop: 4,
+    fontFamily: "PlaywriteDE-Grund",
+    fontWeight: "600",
+  },
+});

@@ -31,7 +31,7 @@ const NavBar = () => {
             <TouchableOpacity style={styles.userImageContainer}>
               <Image
                 source={{
-                  uri: "https://randomuser.me/api/portraits/women/44.jpg",
+                  uri: "https://randomuser.me/api/portraits/women/77.jpg",
                 }}
                 style={styles.userImage}
               />
