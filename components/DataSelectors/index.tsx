@@ -13,15 +13,8 @@ import {
   SelectItem,
   ChevronDownIcon,
 } from "@gluestack-ui/themed";
-
-interface DateSelectorsProps {
-  selectedMonth: string;
-  setSelectedMonth: (month: string) => void;
-  selectedWeek: string;
-  setSelectedWeek: (week: string) => void;
-  months: string[];
-  weeks: string[];
-}
+import { DateSelectorsProps } from "@/types";
+import { styles } from "./styles.module";
 
 const DateSelectors: React.FC<DateSelectorsProps> = ({
   selectedMonth,
@@ -75,24 +68,5 @@ const DateSelectors: React.FC<DateSelectorsProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  dateSelectors: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 12,
-  },
-  selectorContainer: {
-    flex: 1,
-  },
-  selectTrigger: {
-    backgroundColor: "#FFF",
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderWidth: 1,
-    borderColor: "#EEE",
-  },
-});
 
 export default DateSelectors;

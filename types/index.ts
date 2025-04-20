@@ -66,3 +66,20 @@ export interface IProgressCircle {
   timeFrame: "Week" | "Month" | "Year";
   setTimeFrame: (frame: "Week" | "Month" | "Year") => void;
 }
+
+export interface ICategoryBreakdown {
+  categorySpending: ICategorySpending[];
+}
+
+export interface DateSelectorsProps {
+  selectedMonth: string;
+  setSelectedMonth: (month: string) => void;
+  selectedWeek: string;
+  setSelectedWeek: (week: string) => void;
+  months: string[];
+  weeks: string[];
+}
+
+export interface IRecentTransactionsProps {
+  transactions: ITransaction[];
+}
