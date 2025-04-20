@@ -15,7 +15,7 @@ export default function HomeScreen() {
         contentContainerStyle={{ paddingBottom: 20 }} // Add some bottom padding
         showsVerticalScrollIndicator={false} // Hide scroll indicator if desired
       >
-        <NavigationTabs />
+        <NavigationTabs tabs={["Dashboard", "Spending", "Budget"]} />
         <Card />
         <DashboardBtns />
         <Transactions />

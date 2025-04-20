@@ -9,21 +9,21 @@ const Transactions = () => {
       company: "Amazon",
       logo: "https://logo.clearbit.com/amazon.com",
       date: "May 15, 2023",
-      amount: -88,
+      amount: 88,
     },
     {
       id: 2,
       company: "Netflix",
       logo: "https://logo.clearbit.com/netflix.com",
       date: "May 10, 2023",
-      amount: -15.99,
+      amount: 15.99,
     },
     {
       id: 3,
       company: "Starbucks",
       logo: "https://logo.clearbit.com/starbucks.com",
       date: "May 5, 2023",
-      amount: -5.75,
+      amount: 5.75,
     },
   ];
 
@@ -45,7 +45,7 @@ const Transactions = () => {
               <Text style={styles.date}>{transaction.date}</Text>
             </View>
           </View>
-          <Text style={styles.amount}>${transaction.amount}</Text>
+          <Text style={styles.amount}>-${transaction.amount}</Text>
         </View>
       ))}
     </View>

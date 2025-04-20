@@ -10,10 +10,13 @@ import {
   Pressable,
 } from "react-native";
 import { FontAwesome, MaterialIcons, Feather } from "@expo/vector-icons";
+import { useLocalSearchParams } from "expo-router";
+
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+import { IconName, ICategory } from "@/types";
 
 // Category data with colors
 const defaultCategories = [
@@ -25,49 +28,21 @@ const defaultCategories = [
 ];
 
 export default function AddExpenseScreen() {
-  type IconName =
-    | "cutlery"
-    | "bus"
-    | "shopping-bag"
-    | "gamepad"
-    | "ellipsis-h"
-    | "percent"
-    | "plus"
-    | "filter"
-    | "header"
-    | "bold"
-    | "medium"
-    | "key"
-    | "sort"
-    | "map"
-    | "at"
-    | "search"
-    | "repeat"
-    | "anchor"
-    | "meetup";
-
-  type Category = {
-    id: string;
-    name: string;
-    icon: IconName;
-    color: string;
-  };
-
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
   const [merchant, setMerchant] = useState("");
   const [categories, setCategories] = useState(defaultCategories);
   const [transactionType, setTransactionType] = useState("expense"); // Default to expense
 
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(
     null
   );
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newCategoryColor, setNewCategoryColor] = useState("#FF5252");
 
-  const navigation = useNavigation();
   const router = useRouter();
+  const params = useLocalSearchParams();
 
   const formatCurrency = (value: string) => {
     const cleanValue = value.replace(/\D/g, "");
@@ -87,7 +62,7 @@ export default function AddExpenseScreen() {
 
   const handleAddCategory = () => {
     if (newCategoryName.trim()) {
-      const newCategory: Category = {
+      const newCategory: ICategory = {
         id: Date.now().toString(),
         name: newCategoryName,
         icon: "plus" as IconName,
@@ -111,7 +86,15 @@ export default function AddExpenseScreen() {
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.filterBox}>
           <View style={styles.headerRow}>
-            <TouchableOpacity onPress={() => router.push("/")}>
+            <TouchableOpacity
+              onPress={() => {
+                if (params.fromBudgetScreen === "true") {
+                  router.push("/screens/budget");
+                } else {
+                  router.push("/");
+                }
+              }}
+            >
               <Ionicons name="arrow-back" size={24} color="#D32F2F" />
             </TouchableOpacity>
             <Text style={styles.header}>Add Expense</Text>
@@ -127,7 +110,7 @@ export default function AddExpenseScreen() {
                 transactionType === "income" &&
                   styles.optionButtonSelectedIncome,
               ]}
-              onPress={() => router.push("/input-income")}
+              onPress={() => router.push("/screens/input-income")}
             >
               <Feather
                 name="arrow-down"
@@ -181,7 +164,7 @@ export default function AddExpenseScreen() {
                     styles.categoryButtonSelected,
                   { borderColor: category.color },
                 ]}
-                onPress={() => setSelectedCategory(category as Category)}
+                onPress={() => setSelectedCategory(category as ICategory)}
               >
                 <FontAwesome
                   name={category.icon as IconName}

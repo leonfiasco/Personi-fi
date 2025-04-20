@@ -10,27 +10,71 @@ export default function Card({}) {
       transition={{ type: "spring", damping: 20 }}
       style={styles.cardContainer}
     >
-      {/* Background circles */}
+      {/* Background circles with continuous animation */}
       <MotiView
-        from={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.6, scale: 1 }}
-        transition={{ type: "timing", duration: 800, delay: 200 }}
+        from={{
+          opacity: 0,
+          scale: 0.8,
+          translateX: -20,
+          translateY: -20,
+        }}
+        animate={{
+          opacity: 0.6,
+          scale: 1,
+          translateX: [0, 10, 0, -10, 0],
+          translateY: [0, -10, 0, 10, 0],
+        }}
+        transition={{
+          type: "timing",
+          duration: 8000,
+          loop: true,
+        }}
         style={styles.topRightCircle}
       />
+
       <MotiView
-        from={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.6, scale: 1 }}
-        transition={{ type: "timing", duration: 800, delay: 300 }}
+        from={{
+          opacity: 0,
+          scale: 0.8,
+          translateX: 20,
+          translateY: 20,
+        }}
+        animate={{
+          opacity: 0.6,
+          scale: 1,
+          translateX: [0, -15, 0, 15, 0],
+          translateY: [0, 15, 0, -15, 0],
+        }}
+        transition={{
+          type: "timing",
+          duration: 10000,
+          loop: true,
+        }}
         style={styles.bottomLeftCircle}
       />
+
       <MotiView
-        from={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.6, scale: 1 }}
-        transition={{ type: "timing", duration: 800, delay: 400 }}
+        from={{
+          opacity: 0,
+          scale: 0.8,
+          translateX: 30,
+          translateY: -30,
+        }}
+        animate={{
+          opacity: 0.6,
+          scale: 1,
+          translateX: [0, -20, 0, 20, 0],
+          translateY: [0, 20, 0, -20, 0],
+        }}
+        transition={{
+          type: "timing",
+          duration: 12000,
+          loop: true,
+        }}
         style={styles.bottomFarLeftCircle}
       />
 
-      {/* Card content */}
+      {/* Rest of your card content remains exactly the same */}
       <VStack style={styles.totalContainer}>
         <MotiText
           from={{ opacity: 0, translateY: -10 }}
@@ -124,8 +168,8 @@ export default function Card({}) {
   );
 }
 
+// Your existing styles remain exactly the same
 const styles = StyleSheet.create({
-  // ... (keep all your existing styles exactly the same)
   cardContainer: {
     backgroundColor: "#B2DF01",
     marginHorizontal: 16,
@@ -203,13 +247,13 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     color: "#262727",
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 24,
     fontFamily: "PlaywriteDE-Grund",
   },
   totalAmount: {
     color: "#262727",
-    fontSize: 38,
+    fontSize: 45,
     fontWeight: "bold",
     fontFamily: "Winky",
   },
